@@ -9,6 +9,8 @@ $.getJSON("JSONData.json", function(data) {
         output += "<div class='values'>";
         output += '<h5 class="value-id">' + name + '</h5>';
 
+
+        alert(val.Season 1);
         for (var seasons in season){
             for (var episodes in season[seasons]) {
                 for (var info in episodes) {
@@ -28,11 +30,6 @@ $(document).ready(function(){
 });
 
 /* SEEKER FUNCTION */
- if (!RegExp.escape) {
-   RegExp.escape = function (s) {
-     return s.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
-   };
- }
 
 jQuery(function(){
   var $rows = $('.values');
