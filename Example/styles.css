@@ -5,3 +5,15 @@
 .search-bar{
   width: 100%;
 }
+
+#menu-overlay {
+  display: none;
+  position: fixed;
+  background: purple; /* I made this purple so you can see it :) */
+  opacity: 0.1; /* can be made to 0 */
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0;
+  left: 0;
+}
