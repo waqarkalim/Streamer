@@ -1,11 +1,8 @@
-.values{
-  background: #FFFFAA;
+html {
+  font-family: arial;
 }
 
-.search-bar{
-  width: 100%;
-}
-
+/* this #menu-overlay element will cover the screen when the menu is open. Clicking on it will close the menu. */
 #menu-overlay {
   display: none;
   position: fixed;
@@ -16,4 +13,51 @@
   z-index: 0;
   top: 0;
   left: 0;
+}
+.ul_menu, #menu {
+  margin: 0;
+  padding: 0;
+}
+#menu {
+ position: relative;
+ z-index: 5;
+ color: black;
+ font-size: 20px;  
+}
+
+#menu .parent {
+  display: block;
+  background: #efefef;
+  padding: 10px;
+  line-height: 30px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+#menu .parent:hover { background: yellow; }
+#menu .parent .sub-nav { display: none; }
+
+#menu .parent .sub-nav {
+  list-style: none;
+  font-style: italic;
+  background: #ddd;
+  margin: 0;
+  padding: 0 20px;
+}
+#menu .parent .sub-nav li:not(:last-child) {
+  border-bottom: 1px solid #efefef;
+}
+#menu .parent .sub-nav li a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  display: block;
+}
+
+#menu .parent .sub-nav li a:hover { color: purple; }
+.values{
+  background: #FFFFAA;
+}
+
+.search-bar{
+  width: 100%;
 }
