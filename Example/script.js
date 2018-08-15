@@ -108,7 +108,7 @@ $(document).ready(function(){
             if ($('div.iframeholder-' + event.target.id).length === 1) {
                 $('div.iframeholder-' + event.target.id).html(function() {
                     var link = ($("#" + event.target.id).attr("href"));
-                    return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="' + link +'" allowfullscreen></iframe></div>'
+                    return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts" src="' + link +'" allowfullscreen></iframe></div>'
 
                 });
             }
