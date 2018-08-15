@@ -1,36 +1,91 @@
-
 output = "";
-$.getJSON("JSONData.json", function(data) {
-    output += "<div id='menu-overlay'></div>";
-    output += "<div id='menu'>";
 
-    output += "<ul class='list-group' id='myList'>";
-    $.each(data, function(key, val){
+output += "<div class='panel-group' id='myList'>";
+$.getJSON("JSONData.json", function(data) {
+    output += "<div class='panel panel-default'>";
+
+    $.each(data, function(index, val){
         var name = val.Name;
         var season = val.Season;
+        var nameId = name.replace(/\s+/g, '-').toLowerCase();
 
 
-        output += "<li class='parent list-group-item'><b>" + name + "</b>";
-        output += "<ul class='sub-nav'>";
+        output += "<div id='" + nameId + "' class ='panel-collapse collapse>'"
+        output += "<ul class='list-group'>";
+        output += "<li class='list-group-item'>";
+
+        output += "<div class='panel panel-default panel-borderless'>";
+        output += "<div class='panel-heading'>";
+
+        output += "<h4 class='panel-title'>";
+
+        output += "<a data-toggle='collapse' href='#" + nameId + "-" + index + "'>" + name + "</a>";
+
+        output += "</h4>";
+
+        output += "</div>";
+        output += "<div id='" + nameId + "-" + index + "' class='panel-collapse collapse'>";
+        output += "<ul class='list-group'>";
 
         $.each(season, function(key, value) {
 
             var seasonObj = this;
-            output += "<li>" + key ;
-            output += "<ul>";
+            var seasonId = nameId + "-" + key.replace(/\s+/g, '-').toLowerCase();
+
+            output += "<li class='list-group-item'>";
+
+            output += "<div class='panel panel-default'>";
+            output += "<div class='panel-heading'>";
+
+            output += "<h4 class='panel-title'>";
+
+            output += "<a data-toggle='collapse' href='#" + seasonId + "'>" + key + "</a>";
+
+            output += "</h4>";
+
+            output += "</div>";
+
+            output += "<div id='" + seasonId + "' class='panel-collapse collapse'>";
+            output += "<ul class='list-group'>";
+
             $.each(seasonObj, function(key, value) {
-                output += '<li>Episode ' + this.episodeId + '</li>';
+
+                var episodeId = seasonId + "-episode-" +  (this.episodeId);
+                var linkArray = this.episodeLink;
+
+                var link = linkArray[0];
+
+                output += "<li class='list-group-item'>";
+                output += "<div class='panel panel-default'>";
+                output += "<div class='panel-heading'>";
+
+                output += "<h4 class='panel-title'>";
+
+                output += "<a id='" + episodeId + "' data-toggle='collapse' href='" + link + "'>Episode " + this.episodeId + "</a>";
+
+                output += "</h4>";
+
+                output += "</div>";
+                output += "<div id='iframeholder-" + episodeId + "'></div>";
+                output += "</div>";
+
+                output += "</li>";
             });
             output += "</ul>";
+            output += "</div>";
+            output += "</div>";
             output += "</li>";
 
         });
-
         output += "</ul>";
+        output += "</div>";
+        output += "</div>";
         output += "</li>";
+        output += "</ul>";
+        output += "</div>";
 
     });
-    output += "</ul>";
+    output += "</div>";
     output += "</div>";
 });
 
@@ -42,6 +97,23 @@ $(document).ready(function(){
 /* SEEKER FUNCTION */
 
 $(document).ready(function(){
+
+    $("a").click(function(event) {
+
+        if ((event.target.id).includes("episode")) {
+            alert(event.target.id);
+            alert($("#" + event.target.id).attr("href") + " " + $('#iframeholder-' + event.target.id).length);
+
+            if($('#iframeholder-' + event.target.id).length === 1) {
+                alert(('#iframeholder-' + event.target.id));
+                var link = ($("#" + event.target.id).attr("href"));
+                alert('<iframe id="iframe" src="'+ (link) + '" width="700" height="450"></iframe>');
+                $('#iframeHolder-' + event.target.id).html('<iframe id="iframe" src="'+ (link) + '" width="700" height="450"></iframe>');
+            }
+        }
+
+    });
+
     $("#myInput").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#myList li").filter(function() {

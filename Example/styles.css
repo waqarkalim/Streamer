@@ -61,3 +61,15 @@ html {
 .search-bar{
   width: 100%;
 }
+
+
+.panel {
+    border:0;
+    padding: 0;
+    margin: 0;
+}
+
+.panel-borderless {
+    border: 0;
+    box-shadow: none;
+}

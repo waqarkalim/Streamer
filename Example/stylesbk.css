@@ -58,18 +58,29 @@ html {
   background: #FFFFAA;
 }
 
+#menu .parent .sub-nav:hover { background: #efefef; }
+#menu .parent .sub-nav .sub-sub-nav {display: none; }
+
+#menu .parent .sub-nav .sub-sub-nav{
+    list-style: none;
+    font-style: italic;
+    background: #ddd;
+    margin: 0;
+    padding: 0 20px;
+}
+
+
+#menu .parent .sub-nav .sub-sub-nav li a:hover { color: purple; }
+
+#menu .parent .sub-nav .sub-sub-nav li:hover { background: silver; }
+
+.values{
+  background: #FFFFAA;
+}
+
+
+
+
 .search-bar{
   width: 100%;
-}
-
-
-.panel {
-    border:0;
-    padding: 0;
-    margin: 0;
-}
-
-.panel-borderless {
-    border: 0;
-    box-shadow: none;
 }
