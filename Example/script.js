@@ -108,7 +108,8 @@ $(document).ready(function(){
             if ($('div.iframeholder-' + event.target.id).length === 1) {
                 $('div.iframeholder-' + event.target.id).html(function() {
                     var link = ($("#" + event.target.id).attr("href"));
-                    return '<iframe id="iframe" src="'+ (link) + '" width="100%" height="700"></iframe>';
+                    return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="' + link +'" allowfullscreen></iframe></div>'
+
                 });
             }
         }
