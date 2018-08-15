@@ -66,7 +66,7 @@ $.getJSON("JSONData.json", function(data) {
                 output += "</h4>";
 
                 output += "</div>";
-                output += "<div id='iframeholder-" + episodeId + "'></div>";
+                output += "<div class='iframeholder-" + episodeId + "'></div>";
                 output += "</div>";
 
                 output += "</li>";
@@ -101,14 +101,15 @@ $(document).ready(function(){
     $("a").click(function(event) {
 
         if ((event.target.id).includes("episode")) {
+        /*
             alert(event.target.id);
-            alert($("#" + event.target.id).attr("href") + " " + $('#iframeholder-' + event.target.id).length);
-
-            if($('#iframeholder-' + event.target.id).length === 1) {
-                alert(('#iframeholder-' + event.target.id));
-                var link = ($("#" + event.target.id).attr("href"));
-                alert('<iframe id="iframe" src="'+ (link) + '" width="700" height="450"></iframe>');
-                $('#iframeHolder-' + event.target.id).html('<iframe id="iframe" src="'+ (link) + '" width="700" height="450"></iframe>');
+            alert($("#" + event.target.id).attr("href") + " " + $('div.iframeholder-' + event.target.id).length);
+*/
+            if ($('div.iframeholder-' + event.target.id).length === 1) {
+                $('div.iframeholder-' + event.target.id).html(function() {
+                    var link = ($("#" + event.target.id).attr("href"));
+                    return '<iframe id="iframe" src="'+ (link) + '" width="100%" height="700"></iframe>';
+                });
             }
         }
 
