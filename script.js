@@ -66,7 +66,7 @@ $.getJSON("JSONData.json", function(data) {
                 output += "</h4>";
 
                 output += "</div>";
-                output += "<div id='iframeholder-" + episodeId + "'></div>";
+                output += "<div class='iframeholder-" + episodeId + "'></div>";
                 output += "</div>";
 
                 output += "</li>";
@@ -98,19 +98,35 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 
+    var clicks = 0;
     $("a").click(function(event) {
 
         if ((event.target.id).includes("episode")) {
+        /*
             alert(event.target.id);
-            alert($("#" + event.target.id).attr("href") + " " + $('#iframeholder-' + event.target.id).length);
+            alert($("#" + event.target.id).attr("href") + " " + $('div.iframeholder-' + event.target.id).length);
+*/
+            if ($('div.iframeholder-' + event.target.id).length === 1) {
 
-            if($('#iframeholder-' + event.target.id).length === 1) {
-                alert(('#iframeholder-' + event.target.id));
-                var link = ($("#" + event.target.id).attr("href"));
-                alert('<iframe id="iframe" src="'+ (link) + '" width="700" height="450"></iframe>');
-                $('#iframeHolder-' + event.target.id).html('<iframe id="iframe" src="'+ (link) + '" width="700" height="450"></iframe>');
+                if ((clicks % 2) == 0) {
+
+                    $('div.iframeholder-' + event.target.id).html(function() {
+
+                        var link = ($("#" + event.target.id).attr("href"));
+                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts" src="' + link +'" allowfullscreen></iframe></div>'
+
+                    });
+                } else {
+
+                    $('div.iframeholder-' + event.target.id).html(function() {
+                        var link = ($("#" + event.target.id).attr("href"));
+                        return ''
+
+                    });
+                }
             }
         }
+        clicks++;
 
     });
 
