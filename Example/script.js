@@ -48,7 +48,7 @@ $.getJSON("JSONData.json", function(data) {
             output += "<div id='" + seasonId + "' class='panel-collapse collapse'>";
             output += "<ul class='list-group'>";
 
-            $.each(seasonObj, function(key, value) {
+            $.each(seasonObj.reverse(), function(key, value) {
 
                 var episodeId = seasonId + "-episode-" +  (this.episodeId);
                 var linkArray = this.episodeLink;
