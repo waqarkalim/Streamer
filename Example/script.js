@@ -98,6 +98,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 
+    var clicks = 0;
     $("a").click(function(event) {
 
         if ((event.target.id).includes("episode")) {
@@ -106,13 +107,26 @@ $(document).ready(function(){
             alert($("#" + event.target.id).attr("href") + " " + $('div.iframeholder-' + event.target.id).length);
 */
             if ($('div.iframeholder-' + event.target.id).length === 1) {
-                $('div.iframeholder-' + event.target.id).html(function() {
-                    var link = ($("#" + event.target.id).attr("href"));
-                    return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts" src="' + link +'" allowfullscreen></iframe></div>'
 
-                });
+                if ((clicks % 2) == 0) {
+
+                    $('div.iframeholder-' + event.target.id).html(function() {
+
+                        var link = ($("#" + event.target.id).attr("href"));
+                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts" src="' + link +'" allowfullscreen></iframe></div>'
+
+                    });
+                } else {
+
+                    $('div.iframeholder-' + event.target.id).html(function() {
+                        var link = ($("#" + event.target.id).attr("href"));
+                        return ''
+
+                    });
+                }
             }
         }
+        clicks++;
 
     });
 
