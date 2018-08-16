@@ -88,6 +88,8 @@ $.getJSON("JSONData.json", function(data) {
     output += "</div>";
     output += "</div>";
 });
+console.log(output);
+
 
 alert(output);
 $(document).ready(function(){
