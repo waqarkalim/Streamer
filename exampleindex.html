@@ -4,8 +4,14 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Document</title>
+        <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
+        <script src="http://vjs.zencdn.net/c/video.js"></script>
     </head>
     <body>
-        <video tabindex="-1" disableremoteplayback webkit-playsinline playsinline preload="metadata" src="https://nl2.mload.stream/user592/910824acd66bda5635d7e2309f3d60d2/SUB.23.480p.mp4"></video>
+        <!-- <video tabindex="-1" disableremoteplayback webkit-playsinline playsinline preload="metadata" src="https://nl2.mload.stream/user592/910824acd66bda5635d7e2309f3d60d2/SUB.23.480p.mp4"></video> -->
+        <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" poster="my_video_poster.png" data-setup="{}">
+            <source src="https://thevideo.me/embed-ylq7paio46k2.html">
+        </video>
+
     </body>
 </html>
