@@ -90,7 +90,6 @@ $.getJSON("JSONData.json", function(data) {
 });
 console.log(output);
 
-
 alert(output);
 $(document).ready(function(){
     $('span').html(output);
@@ -115,7 +114,7 @@ $(document).ready(function(){
                     $('div.iframeholder-' + event.target.id).html(function() {
 
                         var link = ($("#" + event.target.id).attr("href"));
-                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts" src="' + link +'" allowfullscreen></iframe></div>'
+                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts allow-forms allow-same-origin" src="' + link +'" allowfullscreen></iframe></div>'
 
                     });
                 } else {

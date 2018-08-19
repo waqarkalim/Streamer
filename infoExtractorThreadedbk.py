@@ -32,43 +32,7 @@ soup = BeautifulSoup(res.text, 'lxml')
 filename = "JSONData.json"
 
 
-def main():
 
-    start_time = time.time()
-
-    if checkIfFileEmpty(filename):
-        jsonInitializeList(filename)
-
-    if (checkIfShowInJSON(filename, inputWord)):
-        print("Show already in JSON File...")
-    else:
-        seasonList = getSeasonList()
-        print(seasonList)
-
-    #    with multiprocessing.Pool(processes=8) as pool:
-    #        pool.starmap(getEpisode, product(seasonList))
-
-        pool = Pool(8)
-
-        pool.map(getEpisode, seasonList)
-
-        #with multiprocessing.Pool(processes=8) as pool:
-        #    pool.starmap(getSourceLinkforOneSeason, product(seasonList))
-
-    #    results = calculateParallel(seasonList, 4)
-#        p = Process(target=getEpisode, args=('season',))
-#        getEpisode(season)
-#        getEpisodeList(seasonList)
-
-#        pool = Pool(4)
-
- #       pool.map(getSourceLinkforOneSeason, seasonList)
-
-        getSourceLinks(seasonList)
-
-        jsonWrite(seasonList, inputWord)
-
-    print("--- %s seconds ---" % (time.time() - start_time))
 
 def checkIfFileEmpty(filename):
     filePath = Path(filename)
@@ -214,21 +178,10 @@ def is_fully_alive(url, live_check = False):
 def getSeasonList():
     seasonList = list()
     article = soup.find('article')
-    epsSurity = False
     for el in article.find_all('a'):
         title = str(el.get('title'))
         link = str(el.get('href'))
-
-        if (title.endswith(" Movie")) and (link).startswith("/watch/") and (((title.lower()).startswith(inputWord.lower() + " - ")) and ((title.lower().startswith(inputWord.lower() + ": ")) == False) and ((title.lower().startswith(inputWord.lower() + " -(")) == False)):
-            #print(el.find_next_siblings('div'))
-            for sibling in el.find_next_siblings('div'):
-                #print(sibling.get("class"))
-                if sibling.get("class")[0] == "eps":
-                    epsSurity = True
-                    #print("-------------------")
-            #print(epsSurity)
-            if (epsSurity == False):
-                continue
+        if (title.endswith(" Movie")) and (link).startswith("/watch/") and (((title.lower()).startswith(inputWord.lower() + " - ")) or ((title.lower().startswith(inputWord.lower() + ": ")))):
             link = "https://www7.fmovies.io" + link
             print(title + " ::: " + link)
 
@@ -241,7 +194,7 @@ def getSeasonList():
             seasonObj = season(seasonId, link, None)
             seasonList.append(seasonObj)
 
-    seasonList.sort(key=lambda x: int(x.id), reverse=False)
+    seasonList.sort(key=lambda x: x.id, reverse=True)
 
     return seasonList
 
@@ -310,7 +263,6 @@ def getEpisode(season):
             #print(atext + " ............... " + ahref)
         episodeObj = episode(episodeId, atext,"https://www7.fmovies.io" + ahref, None)
         episodesList.append(episodeObj)
-        episodesList.sort(key=lambda x: int(x.id), reverse=True)
         #bubbleSort(episodesList.get("Season"), "episodeId")
         season.setEpisodeList(episodesList)
 
@@ -386,4 +338,38 @@ def calculateParallel(seasons, threads=2):
 
 if __name__ == '__main__':
 
-    main()
+    start_time = time.time()
+
+    if checkIfFileEmpty(filename):
+        jsonInitializeList(filename)
+
+    if (checkIfShowInJSON(filename, inputWord)):
+        print("Show already in JSON File...")
+    else:
+        seasonList = getSeasonList()
+        print(seasonList)
+
+    #    with multiprocessing.Pool(processes=8) as pool:
+    #        pool.starmap(getEpisode, product(seasonList))
+
+        pool = Pool(8)
+
+        pool.map(getEpisode, seasonList)
+
+        #with multiprocessing.Pool(processes=8) as pool:
+        #    pool.starmap(getSourceLinkforOneSeason, product(seasonList))
+
+    #    results = calculateParallel(seasonList, 4)
+#        p = Process(target=getEpisode, args=('season',))
+#        getEpisode(season)
+#        getEpisodeList(seasonList)
+
+#        pool = Pool(4)
+
+ #       pool.map(getSourceLinkforOneSeason, seasonList)
+
+        getSourceLinks(seasonList)
+
+        jsonWrite(seasonList, inputWord)
+
+    print("--- %s seconds ---" % (time.time() - start_time))

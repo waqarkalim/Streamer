@@ -13,14 +13,16 @@ class check_link():
             req=urllib.request.Request(url=address)
             resp=urllib.request.urlopen(req)
             if resp.status in [400,404,403,408,409,501,502,503]:
-#                print (Fore.RED+resp.status+"-"+resp.reason+"-->"+address)
+                print (Fore.RED+resp.status+"-"+resp.reason+"-->"+address)
                 return False
             else:
-#                print (Fore.GREEN+"no problem in-->"+address)
+                #print (Fore.GREEN+"no problem in-->"+address)
                 return True
 
         except Exception as e:
-            #print (Fore.YELLOW+"{}-{}".format(e,address))
+            if (e.reason in ["Forbidden", "Request forbidden -- authorization will not help", "Not Found", "Nothing matches the given URI"]):
+                return True
+            print (Fore.YELLOW+"{} - {}".format(e,address))
             return False
 #            pass
 def pattern_adjust(a):
