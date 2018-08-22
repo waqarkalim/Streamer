@@ -7,6 +7,8 @@ $.getJSON("JSONData.json", function(data) {
     $.each(data, function(index, val){
         var name = val.Name;
         var season = val.Season;
+        var punctuationless = name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+        var name = punctuationless.replace(/\s{2,}/g," ");
         var nameId = name.replace(/\s+/g, '-').toLowerCase();
 
 
@@ -30,6 +32,8 @@ $.getJSON("JSONData.json", function(data) {
         $.each(season, function(key, value) {
 
             var seasonObj = this;
+            var punctuationless = name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            var name = punctuationless.replace(/\s{2,}/g," ");
             var seasonId = nameId + "-" + key.replace(/\s+/g, '-').toLowerCase();
 
             output += "<li class='list-group-item'>";
@@ -48,7 +52,7 @@ $.getJSON("JSONData.json", function(data) {
             output += "<div id='" + seasonId + "' class='panel-collapse collapse'>";
             output += "<ul class='list-group'>";
 
-            $.each(seasonObj.reverse(), function(key, value) {
+            $.each(seasonObj, function(key, value) {
 
                 var episodeId = seasonId + "-episode-" +  (this.episodeId);
                 var linkArray = this.episodeLink;
@@ -88,7 +92,6 @@ $.getJSON("JSONData.json", function(data) {
     output += "</div>";
     output += "</div>";
 });
-console.log(output);
 
 alert(output);
 $(document).ready(function(){
@@ -114,7 +117,7 @@ $(document).ready(function(){
                     $('div.iframeholder-' + event.target.id).html(function() {
 
                         var link = ($("#" + event.target.id).attr("href"));
-                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts allow-forms allow-same-origin" src="' + link +'" allowfullscreen></iframe></div>'
+                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts" src="' + link +'" allowfullscreen></iframe></div>'
 
                     });
                 } else {
@@ -133,9 +136,8 @@ $(document).ready(function(){
 
     $("#myInput").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $("#myList div").filter(function() {
+        $("#myList li").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-
         });
     });
 

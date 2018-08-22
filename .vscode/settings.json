@@ -1,0 +1,13 @@
+{
+
+    "vim.useSystemClipboard": true,
+    "vim.insertModeKeyBindings": [
+        {
+          "before": ["j", "j"],
+          "after": ["<Esc>"]
+        }
+    ],
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+}
