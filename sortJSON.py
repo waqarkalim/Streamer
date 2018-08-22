@@ -56,7 +56,7 @@ def main():
     #        bubbleSort(el.get("Season").get(season), "episodeId")
 
     sortNames(data)
-    sortSeasons(data)
+#    sortSeasons(data)
 
 
     with open(filename, "w", encoding='utf-8') as write_file:
