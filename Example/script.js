@@ -7,7 +7,7 @@ $.getJSON("JSONData.json", function(data) {
     $.each(data, function(index, val){
         var name = val.Name;
         var season = val.Season;
-        var punctuationless = name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+        var punctuationless = name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g,"");
         var name = punctuationless.replace(/\s{2,}/g," ");
         var nameId = name.replace(/\s+/g, '-').toLowerCase();
 
@@ -32,7 +32,7 @@ $.getJSON("JSONData.json", function(data) {
         $.each(season, function(key, value) {
 
             var seasonObj = this;
-            var punctuationless = key.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            var punctuationless = key.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g,"");
             var key = punctuationless.replace(/\s{2,}/g," ");
             var seasonId = nameId + "-" + key.replace(/\s+/g, '-').toLowerCase();
 
