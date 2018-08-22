@@ -32,8 +32,8 @@ $.getJSON("JSONData.json", function(data) {
         $.each(season, function(key, value) {
 
             var seasonObj = this;
-            var punctuationless = name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-            var name = punctuationless.replace(/\s{2,}/g," ");
+            var punctuationless = key.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            var key = punctuationless.replace(/\s{2,}/g," ");
             var seasonId = nameId + "-" + key.replace(/\s+/g, '-').toLowerCase();
 
             output += "<li class='list-group-item'>";
