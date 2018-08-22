@@ -21,7 +21,7 @@ url = "https://www7.fmovies.io/search.html?keyword="
 #inputWord = "The Vampire Diaries"
 
 inputWord = process(sys.argv[1])
-inputWord = "Marvel's Cloak & Dagger"
+#inputWord = "Marvel's Cloak & Dagger"
 print(inputWord)
 inputWord = inputWord.replace(" ", "+")
 
@@ -311,7 +311,7 @@ def getEpisode(season):
             #print(atext + " ............... " + ahref)
         episodeObj = episode(episodeId, atext,"https://www7.fmovies.io" + ahref, None)
         episodesList.append(episodeObj)
-        episodesList.sort(key=lambda x: int(x.id), reverse=True)
+        episodesList.sort(key=lambda x: int(x.id), reverse=False)
         #bubbleSort(episodesList.get("Season"), "episodeId")
         season.setEpisodeList(episodesList)
 

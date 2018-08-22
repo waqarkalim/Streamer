@@ -117,7 +117,7 @@ $(document).ready(function(){
                     $('div.iframeholder-' + event.target.id).html(function() {
 
                         var link = ($("#" + event.target.id).attr("href"));
-                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts" src="' + link +'" allowfullscreen></iframe></div>'
+                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts allow-same-origin allow-forms" src="' + link +'" allowfullscreen></iframe></div>'
 
                     });
                 } else {
