@@ -21,7 +21,7 @@ url = "https://www7.fmovies.io/search.html?keyword="
 #inputWord = "The Vampire Diaries"
 
 inputWord = process(sys.argv[1])
-#inputWord = "Marvel's Cloak & Dagger"
+inputWord = "Marvel's Cloak & Dagger"
 print(inputWord)
 inputWord = inputWord.replace(" ", "+")
 
