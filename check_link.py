@@ -20,7 +20,7 @@ class check_link():
                 return True
 
         except Exception as e:
-            if (e.reason in ["Forbidden", "Request forbidden -- authorization will not help", "Not Found", "Nothing matches the given URI"]):
+            if (e.reason in ["Forbidden", "Request forbidden -- authorization will not help"]):
                 return True
             print (Fore.YELLOW+"{} - {}".format(e,address))
             return False

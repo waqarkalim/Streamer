@@ -23,6 +23,7 @@ def removeEmptyShows():
         jsonInput = json.load(f)
         for shows in jsonInput:
             if (len(shows.get("Season"))  == 0):
+                print(show.get("Name"))
                 jsonInput.remove(shows)
 
     with open(filename, mode='w', encoding='utf-8') as f:
