@@ -60,11 +60,13 @@ minutes = time // 60
 time %= 60
 seconds = time
 
-print("Final Time taken --- d:h:m:s-> %d:%d:%d:%d" % (day, hour, minutes, seconds))
 
+os.system('python3 removeShow.py')
+os.system('python3 removeShow.py')
 os.system('python3 removeShow.py')
 os.system('python3 sortJSON.py')
 
+print("Final Time taken --- d:h:m:s-> %d:%d:%d:%d" % (day, hour, minutes, seconds))
 #for el in listofNames:
 #    print(el.find("a"))
 #    Names.append(el.find("div", {"class": "lister-item-content"}))

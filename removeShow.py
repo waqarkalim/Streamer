@@ -6,7 +6,7 @@ filename = "JSONData.json"
 
 #inputWord = "Doctor Who"
 
-#inputWord = process(sys.argv[1])
+inputWord = process(sys.argv[1])
 
 def removeFromJSON():
     with open(filename, mode='r', encoding='utf-8') as f:
@@ -29,5 +29,5 @@ def removeEmptyShows():
     with open(filename, mode='w', encoding='utf-8') as f:
         json.dump(jsonInput, f)
 
-#removeFromJSON()
-removeEmptyShows()
+removeFromJSON()
+#removeEmptyShows()

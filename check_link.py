@@ -16,10 +16,12 @@ class check_link():
                 print (Fore.RED+resp.status+"-"+resp.reason+"-->"+address)
                 return False
             else:
-                print (Fore.GREEN+"no problem in-->"+address)
+                #print (Fore.GREEN+"no problem in-->"+address)
                 return True
 
         except Exception as e:
+            if (e.reason in ["Forbidden", "Request forbidden -- authorization will not help"]):
+                return True
             print (Fore.YELLOW+"{} - {}".format(e,address))
             return False
 #            pass
