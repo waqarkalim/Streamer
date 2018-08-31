@@ -1,3 +1,13 @@
+from selenium import webdriver
+from selenium.common.exceptions import UnexpectedAlertPresentException
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
+
 from itertools import product
 from multiprocessing import Process
 from multiprocessing.dummy import Pool
@@ -18,9 +28,9 @@ from StringSuggestion import *
 
 url = "https://www7.fmovies.io/search.html?keyword="
 
-#inputWord = "The Vampire Diaries"
 
 inputWord = process(sys.argv[1])
+#inputWord = "Marvel's Cloak & Dagger"
 print(inputWord)
 inputWord = inputWord.replace(" ", "+")
 
@@ -31,8 +41,11 @@ inputWord = inputWord.replace("+", " ")
 soup = BeautifulSoup(res.text, 'lxml')
 filename = "JSONData.json"
 
+options = Options()
+options.add_argument("--headless")
+options.add_argument("--mute-audio")
 
-
+driver = webdriver.Firefox(firefox_options=options)
 
 def checkIfFileEmpty(filename):
     filePath = Path(filename)
@@ -94,28 +107,38 @@ def getSourceLinks(seasonList):
     for season in seasonList:
         print("Season " + str(season.getId()))
         for episode in season.getEpisodeList():
-            res = requests.get(episode.getsiteURL())
-            soup = BeautifulSoup(res.text, 'lxml')
 
-            scriptTags = soup.find_all("script")
-            print("     Episode " + str(episode.getId()))
-            for script in scriptTags:
-                if ("link_server_f" in str(script)):
-                    sourceLinkList = re.findall('"https:/([^"]*)"', str(script))
-                    for sourceLink in sourceLinkList:
-                        sourceLinkList[sourceLinkList.index(sourceLink)] = "https:/" + sourceLink
-                    for sourceLink in sourceLinkList:
-                        checkObj = check_link(sourceLink)
-                        #checkObj.check(sourceLink)
-                        if (checkObj.check(sourceLink) == False):
-                            #if (is_fully_alive(sourceLink) == False):
-                            del sourceLinkList[sourceLinkList.index(sourceLink)]
-                        else:
-                            AtLeastOneAlive = True
-                    #insert broken link checking
-            if (AtLeastOneAlive == False):
-                print("         sorry, no working links found...")
-            episode.setsourceLink(sourceLinkList)
+            sourceLinkList = list()
+            episodeSiteURL = episode.getsiteURL()
+
+            driver.get(episodeSiteURL)
+            #print("HTML gotten by driver...")
+
+            try:
+                elementIcon = driver.find_element_by_class_name("fa.fa-play")
+
+                #webdriver.ActionChains(driver).move_to_element(elementIcon ).click(elementIcon ).perform()
+
+                driver.execute_script("arguments[0].click();", elementIcon)
+                #elementIcon.click()
+                #print("Icon clicked...")
+
+                #time.sleep(5)
+                playerElement = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "player.current")))
+                #playerElement = driver.find_element_by_class_name("player.current")
+                soup = BeautifulSoup(playerElement.get_attribute("innerHTML"), 'lxml')
+                link = soup.find("iframe")['src']
+                #print("Source found...")
+                sourceLinkList.append(link)
+
+
+                episode.setsourceLink(sourceLinkList)
+            except NoAlertPresentException:
+                print("NoAlertPresentException found...")
+            except UnexpectedAlertPresentException:
+                print("UnexpectedAlertPresentException found...")
+
+            print("    Episode " + str(episode.getId()))
 
 def getSourceLinkforOneSeason(season):
     AtLeastOneAlive = False
@@ -194,7 +217,7 @@ def getSeasonList():
             seasonObj = season(seasonId, link, None)
             seasonList.append(seasonObj)
 
-    seasonList.sort(key=lambda x: x.id, reverse=True)
+    seasonList.sort(key=lambda x: int(x.id), reverse=False)
 
     return seasonList
 
@@ -263,7 +286,9 @@ def getEpisode(season):
             #print(atext + " ............... " + ahref)
         episodeObj = episode(episodeId, atext,"https://www7.fmovies.io" + ahref, None)
         episodesList.append(episodeObj)
+
         #bubbleSort(episodesList.get("Season"), "episodeId")
+        episodesList.sort(key=lambda x: int(x.id), reverse=False)
         season.setEpisodeList(episodesList)
 
 

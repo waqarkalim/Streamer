@@ -30,7 +30,8 @@ Names = ["Doctor Who", "The Vietnam War", "Game of Thrones", "American Gods", "V
 
 def process(name):
     #os.system('python3 infoExtractorThreaded.py "' + name + '"')
-    os.system('python3 infoExtractorThreaded.py "' + name + '" > /dev/null 2>&1')
+    os.system('python3 infoExtractorThreadedbk.py "' + name + '"')
+    #os.system('python3 infoExtractorThreaded.py "' + name + '" > /dev/null 2>&1')
     print(name + " Completed")
 
 #for name in Names:

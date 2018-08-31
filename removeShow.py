@@ -7,6 +7,7 @@ filename = "JSONData.json"
 #inputWord = "Doctor Who"
 
 inputWord = process(sys.argv[1])
+inputWord = "Marvel's Cloak & Dagger"
 
 def removeFromJSON():
     with open(filename, mode='r', encoding='utf-8') as f:
