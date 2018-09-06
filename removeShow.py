@@ -6,10 +6,11 @@ filename = "JSONData.json"
 
 #inputWord = "Doctor Who"
 
-inputWord = process(sys.argv[1])
-inputWord = "Marvel's Cloak & Dagger"
 
 def removeFromJSON():
+    inputWord = process(sys.argv[1])
+    inputWord = "Marvel's Cloak & Dagger"
+
     with open(filename, mode='r', encoding='utf-8') as f:
         jsonInput = json.load(f)
         for shows in jsonInput:
@@ -30,5 +31,5 @@ def removeEmptyShows():
     with open(filename, mode='w', encoding='utf-8') as f:
         json.dump(jsonInput, f)
 
-removeFromJSON()
-#removeEmptyShows()
+#removeFromJSON()
+removeEmptyShows()
