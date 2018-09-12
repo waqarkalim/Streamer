@@ -99,10 +99,8 @@ $.getJSON("JSONData.json", function(data) {
     output += "</div>";
     output += "</div>";
 
-    // $('span').html(output); // ACTUALLY WORKS
+    $('span').html(output); // ACTUALLY WORKS
 
-},function() {
-    $('span').html(output);
 });
 
 
