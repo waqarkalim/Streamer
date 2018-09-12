@@ -1,21 +1,14 @@
-var output = "";
-
-// output.promise().done(function( arg1 ) {
-
-//   alert( this === output && arg1 === output );
-// });
+output = "";
 
 output += "<div class='panel-group' id='myList'>";
-
-
 $.getJSON("JSONData.json", function(data) {
     output += "<div class='panel panel-default'>";
 
-    $.each(data, function(index, val) {
+    $.each(data, function(index, val){
         var name = val.Name;
         var season = val.Season;
-        var punctuationless = name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "");
-        var name = punctuationless.replace(/\s{2,}/g, " ");
+        var punctuationless = name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g,"");
+        var name = punctuationless.replace(/\s{2,}/g," ");
         var nameId = name.replace(/\s+/g, '-').toLowerCase();
 
 
@@ -39,8 +32,8 @@ $.getJSON("JSONData.json", function(data) {
         $.each(season, function(key, value) {
 
             var seasonObj = this;
-            var punctuationless = key.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "");
-            var key = punctuationless.replace(/\s{2,}/g, " ");
+            var punctuationless = key.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g,"");
+            var key = punctuationless.replace(/\s{2,}/g," ");
             var seasonId = nameId + "-" + key.replace(/\s+/g, '-').toLowerCase();
 
             output += "<li class='list-group-item'>";
@@ -61,7 +54,7 @@ $.getJSON("JSONData.json", function(data) {
 
             $.each(seasonObj, function(key, value) {
 
-                var episodeId = seasonId + "-episode-" + (this.episodeId);
+                var episodeId = seasonId + "-episode-" +  (this.episodeId);
                 var linkArray = this.episodeLink;
 
                 var link = linkArray[0];
@@ -98,26 +91,22 @@ $.getJSON("JSONData.json", function(data) {
     });
     output += "</div>";
     output += "</div>";
+});
 
-    // $('span').html(output); // ACTUALLY WORKS
-
-},function() {
+alert(output);
+$(document).ready(function(){
     $('span').html(output);
 });
 
-
-// $(document).ready(function() {
-// });
-
 /* SEEKER FUNCTION */
 
-$(document).ready(function() {
+$(document).ready(function(){
 
     var clicks = 0;
     $("a").click(function(event) {
 
         if ((event.target.id).includes("episode")) {
-            /*
+        /*
             alert(event.target.id);
             alert($("#" + event.target.id).attr("href") + " " + $('div.iframeholder-' + event.target.id).length);
 */
@@ -128,7 +117,7 @@ $(document).ready(function() {
                     $('div.iframeholder-' + event.target.id).html(function() {
 
                         var link = ($("#" + event.target.id).attr("href"));
-                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts allow-forms allow-same-origin" src="' + link + '" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" marginheight="0" marginwidth="0" scrolling="no" target="_blank" frameborder="0"></iframe></div>'
+                        return '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" sandbox="allow-scripts allow-forms allow-same-origin" src="' + link +'" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" marginheight="0" marginwidth="0" scrolling="no" target="_blank" frameborder="0"></iframe></div>'
 
                     });
                 } else {
@@ -152,20 +141,20 @@ $(document).ready(function() {
         });
     });
 
-    $('.parent').on("click", function() {
+  $('.parent').on("click",function(){
 
-        $(this).find(".sub-nav").toggle();
-        $(this).siblings().find(".sub-nav").hide();
+    $(this).find(".sub-nav").toggle();
+    $(this).siblings().find(".sub-nav").hide();
 
-        if ($(".sub-nav:visible").length === 0) {
-            $("#menu-overlay").hide();
-        } else {
-            $("#menu-overlay").show();
-        }
-    });
+    if($(".sub-nav:visible").length === 0 ){
+      $("#menu-overlay").hide();
+    }else {
+      $("#menu-overlay").show();
+    }
+  });
 
-    $("#menu-overlay").on("click", function() {
-        $(".sub-nav").hide();
-        $(this).hide();
-    });
+   $("#menu-overlay").on("click",function(){
+     $(".sub-nav").hide();
+     $(this).hide();
+   });
 });

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
-        <meta charset="UTF-8"/>
+        <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Document</title>
         <!-- Latest compiled and minified CSS -->
@@ -18,14 +19,29 @@
         <script type="text/javascript" src="script.js"></script>
         <script type="text/javascript" src="JSONData.json"></script>
     </head>
+
     <body>
         <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8 btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="options" id="option1" checked> Option 1
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="options" id="option2"> Option 2
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="options" id="option3"> Option 3
+                    </label>
+                </div>
+            </div>
             <br>
             <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
             <ul class="list-group values" id="myList">
             </ul>
-            <span id="content"></span>            
+            <span id="content"></span>
         </div>
     </body>
+
 </html>
