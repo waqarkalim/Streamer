@@ -99,8 +99,11 @@ $.getJSON("JSONData.json", function(data) {
     output += "</div>";
     output += "</div>";
 
-    $('span').html(output); // ACTUALLY WORKS
+    // $('span').html(output); // ACTUALLY WORKS but not on Mobile so change it, BUT best one so far
 
+}).done(function() {
+    $('span').html(output);
+    // window.location.reload();
 });
 
 
