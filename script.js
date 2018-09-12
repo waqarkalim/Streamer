@@ -102,18 +102,10 @@ $.getJSON("JSONData.json", function(data) {
     // $('span').html(output); // ACTUALLY WORKS but not on Mobile so change it, BUT best one so far
 
 }).done(function() {
+    // alert(output);
     $('span').html(output);
-    // window.location.reload();
-});
 
-
-// $(document).ready(function() {
-// });
-
-/* SEEKER FUNCTION */
-
-$(document).ready(function() {
-
+    /* SEEKER FUNCTION */
     var clicks = 0;
     $("a").click(function(event) {
 
@@ -169,4 +161,11 @@ $(document).ready(function() {
         $(".sub-nav").hide();
         $(this).hide();
     });
+    // window.location.reload();
 });
+
+
+// $(document).ready(function() {
+// });
+
+
