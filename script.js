@@ -1,14 +1,11 @@
 var output = "";
 
-// output.promise().done(function( arg1 ) {
 
-//   alert( this === output && arg1 === output );
-// });
-
-output += "<div class='panel-group' id='myList'>";
 
 
 var jsonGet = $.getJSON("JSONData.json", function(data) {
+
+    output += "<div class='panel-group' id='myList'>";
     output += "<div class='panel panel-default'>";
 
     $.each(data, function(index, val) {
@@ -163,8 +160,4 @@ jsonGet.done(function() {
         $(this).hide();
     });
 });
-
-// $(document).ready(function() {
-// });
-
 
