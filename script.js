@@ -8,7 +8,7 @@ var output = "";
 output += "<div class='panel-group' id='myList'>";
 
 
-$.getJSON("JSONData.json", function(data) {
+var jsonGet = $.getJSON("JSONData.json", function(data) {
     output += "<div class='panel panel-default'>";
 
     $.each(data, function(index, val) {
@@ -101,8 +101,9 @@ $.getJSON("JSONData.json", function(data) {
 
     // $('span').html(output); // ACTUALLY WORKS but not on Mobile so change it, BUT best one so far
 
-}).done(function() {
-    // alert(output);
+});
+
+jsonGet.done(function() {
     $('span').html(output);
 
     /* SEEKER FUNCTION */
@@ -161,9 +162,7 @@ $.getJSON("JSONData.json", function(data) {
         $(".sub-nav").hide();
         $(this).hide();
     });
-    // window.location.reload();
 });
-
 
 // $(document).ready(function() {
 // });
